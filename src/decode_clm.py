@@ -21,9 +21,9 @@ def decrypt_image(encrypted_image_path,r,x0):
     decrypt_image = Image.fromarray(decrypt_image)
 
     return decrypt_image
-image_path ='thuyvan\\qrcode.jpg'
-encrypted_image_path ='thuyvan\\secret_img.jpg'
-decrypt_image_path = 'thuyvan\\giai_qrcode.jpg'
+
+encrypted_image_path ='image\\re_secret_image.png'
+decrypt_image_path = 'image\\giai_qrcode_fake.jpg'
 r = 4
 x0= 0.5
 decrypt_image= decrypt_image(encrypted_image_path,r,x0)
