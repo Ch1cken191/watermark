@@ -1,29 +1,39 @@
-import cv2
+import cv2 
 import numpy as np
 import pywt
 
-cover_img = cv2.imread('image//an_ma.png',0)
-coeffs = pywt.dwt2(cover_img,'haar')
-cA,(cH,cV,cD) = coeffs
-
-def mang(cover):
-    U,s,V = np.linalg.svd(cover)
-    secret_cA = np.zeros_like(cover)
-    alpha = 0.9
-    for i in range(len(cover)):
-        mau = U[i,:10]*s[:10]@V[:10,:]
-        for j in range(len(cover[0])):
-            if (i<len(secret_cA) and len(secret_cA[0])):
-                secret_cA[i][j] = (cover[i][j] - mau[j]*alpha)*(1-alpha)
-    return secret_cA
 secret_img = cv2.imread("image//ma_qrcode.png",0)
+cover_img = cv2.imread("image//lon.jpg",0)
+
+coeffs = pywt.dwt2(cover_img,"haar")
+cA,(cH,cV,cD) = coeffs
+U,s,V = np.linalg.svd(cA)
+
+
 secret_coeffs = pywt.dwt2(secret_img,'haar')
 secret_cA,(secret_cH,secret_cV,secret_cD) = secret_coeffs
-new_shape = (200,200)
 
-new_array = np.zeros(new_shape)
-new_array[:new_array.shape[0],:new_array.shape[1]]= mang(cA)[:new_array.shape[0],:new_array.shape[1]]
-secret_coeffs = new_array,(secret_cH,secret_cV,secret_cD)
+def mang(cover,secret):
+    U,s,V= np.linalg.svd(cover)
+    alpha = 0.03
+    cA_new = list()
+    for i in range(len(cover)):
+        cA_1 = []
+        for j in range(len(cover[0])):
+            if (i<len(secret) and j< len(secret[0])):
+                test = cover[i][j] + alpha*secret[i][j]
+            else:
+                test = cover[i][j] +alpha
+            cA_1.append(test)
+        cA_new.append(cA_1)
+    return cA_new
+s[:10]=0
+cA_new = mang(cA,secret_cA)
 
-secret_img_new = pywt.idwt2(secret_coeffs,"haar")
-cv2.imwrite("image//secret_img.png",secret_img_new)
+cH_new = mang(cH,secret_cH)
+cV_new = mang(cV ,secret_cV)
+cD_new = mang(cD ,secret_cD)
+coeffs_new = cA_new,(cH_new,cV_new,cD_new)
+img_new = pywt.idwt2(coeffs_new,'haar')
+
+cv2.imwrite('image//an_ma.png',img_new)
