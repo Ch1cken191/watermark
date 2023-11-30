@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import pywt
 
-cover_img = cv2.imread('image//1_cover.png',0)
+cover_img = cv2.imread('image//re_1_cover.png',0)
 coeffs = pywt.dwt2(cover_img,'haar')
 cA,(cH,cV,cD) = coeffs
 

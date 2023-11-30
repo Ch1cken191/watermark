@@ -3,3 +3,4 @@ Image
 numpy
 opencv-python
 PyWavelets
+matplotlib

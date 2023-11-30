@@ -3,7 +3,7 @@ import numpy as np
 import pywt
 
 secret_img = cv2.imread("image//en_QR_Image.png",0)
-cover_img = cv2.imread("image//5_cover.png",0)
+cover_img = cv2.imread("image//1_cover.png",0)
 
 coeffs = pywt.dwt2(cover_img,"haar")
 cA,(cH,cV,cD) = coeffs
@@ -37,4 +37,4 @@ cD_new = mang(cD ,secret_cD)
 coeffs_new = cA_new,(cH_new,cV_new,cD_new)
 img_new = pywt.idwt2(coeffs_new,'haar')
 
-cv2.imwrite('image//5_cover.png',img_new)
+cv2.imwrite('image//re_1_cover.png',img_new)

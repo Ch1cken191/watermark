@@ -30,7 +30,8 @@ def read_qr_code(image_path):
     value, pts, qr_code = detector.detectAndDecode(img)
     return value
 
-encrypted_image_path = 'image\\en_QR_Image.png'
+# encrypted_image_path = 'image\\en_QR_Image.png'
+encrypted_image_path = 'image\\extracted_QR.png'
 decrypt_image_path = 'image\\de_QR_Image.jpg'
 
 r = 4
