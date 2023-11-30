@@ -9,7 +9,6 @@ coeffs = pywt.dwt2(cover_img,"haar")
 cA,(cH,cV,cD) = coeffs
 U,s,V = np.linalg.svd(cA)
 
-
 secret_coeffs = pywt.dwt2(secret_img,'haar')
 secret_cA,(secret_cH,secret_cV,secret_cD) = secret_coeffs
 

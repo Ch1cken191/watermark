@@ -22,7 +22,6 @@ def decrypt_image(encrypted_image_path, r, x0):
     image_array = (image_array * 255).astype(np.uint8)
     decrypt_image = image_array ^ ma
     decrypt_image = Image.fromarray(decrypt_image)
-
     return decrypt_image
 
 def read_qr_code(image_path):
