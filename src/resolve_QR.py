@@ -22,8 +22,9 @@ def encrypt_image(image_path,r,x0):
     encrypt_image = image_array ^ ma
     encrypt_image = Image.fromarray(encrypt_image)
     return encrypt_image
-image_path = 'image\\new_qrcode.jpg'
-encrypt_image_path = 'image\\ma_qrcode.png'
+
+image_path = 'image\\QR_Image.jpg'
+encrypt_image_path = 'image\\en_QR_Image.png'
 r= 4
 x0= 0.5
 encrypt_image = encrypt_image(image_path,r,x0)

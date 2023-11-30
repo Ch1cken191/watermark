@@ -8,14 +8,14 @@ qr = qrcode.QRCode(
     border = 4,
 )
 
-data = "ky thuat giau tin"
+data = "Watermarking_Using_QR_Code"
 qr.add_data(data)
 
 qr.make(fit= True)
 
-img = qr.make_image(fill_color ="black",back_color ="white")
-img.save("image//qrcode.jpg")
-image = Image.open("image\\qrcode.jpg")
+img = qr.make_image(fill_color ="black", back_color ="white")
+img.save("image\\QR_Image.jpg")
+image = Image.open("image\\QR_Image.jpg")
 new_image = image.resize((400,400))
 
-new_image.save("image\\new_qrcode.jpg")
+new_image.save("image\\QR_Image.jpg")

@@ -1,0 +1,5 @@
+qrcode
+Image
+numpy
+opencv-python
+PyWavelets
