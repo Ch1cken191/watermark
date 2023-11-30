@@ -3,6 +3,8 @@ from PIL import Image
 import cv2
 import qrcode
 
+# Sử dụng phương pháp ánh xạ logistic 
+# để tạo ra một mảng các số ngẫu nhiên
 def logistic_map(r, x0, n):
     xn = x0
     results = []
@@ -11,6 +13,9 @@ def logistic_map(r, x0, n):
         results.append(xn)
     return results
 
+# Hàm giải mã ảnh
+# Được mã hóa bằng phương pháp XOR với mảng key (logistic map)
+# Trả về ảnh giải mã
 def decrypt_image(encrypted_image_path, r, x0):
     image = Image.open(encrypted_image_path).convert('L')
     image_array = np.array(image)
@@ -24,6 +29,8 @@ def decrypt_image(encrypted_image_path, r, x0):
     decrypt_image = Image.fromarray(decrypt_image)
     return decrypt_image
 
+# Hàm đọc thông điệp từ QR code
+# Trả về thông điệp
 def read_qr_code(image_path):
     img = cv2.imread(image_path)
     detector = cv2.QRCodeDetector()
@@ -31,7 +38,7 @@ def read_qr_code(image_path):
     return value
 
 # encrypted_image_path = 'image\\en_QR_Image.png'
-encrypted_image_path = 'image\\extracted_QR.png'
+encrypted_image_path = 'image\\en_QR_Image.png'
 decrypt_image_path = 'image\\de_QR_Image.jpg'
 
 r = 4

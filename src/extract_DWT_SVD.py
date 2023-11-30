@@ -2,13 +2,17 @@ import cv2
 import numpy as np
 import pywt
 
+# Xử lý ảnh cover bằng phép biến đổi wavelet
 cover_img = cv2.imread('image//re_1_cover.png',0)
 coeffs = pywt.dwt2(cover_img,'haar')
 cA,(cH,cV,cD) = coeffs
 
+# Lấy ảnh secret từ ảnh cover đã nhúng ảnh secret
+# bằng phương pháp SVD
 def mang(cover):
     U,s,V = np.linalg.svd(cover)
     secret_cA = np.zeros_like(cover)
+    # Tham số alpha có thể thay đổi để tăng độ chính xác
     alpha = 0.9
     for i in range(len(cover)):
         mau = U[i,:10]*s[:10]@V[:10,:]
@@ -16,6 +20,7 @@ def mang(cover):
             if (i<len(secret_cA) and len(secret_cA[0])):
                 secret_cA[i][j] = (cover[i][j] - mau[j]*alpha)*(1-alpha)
     return secret_cA
+
 
 secret_img = cv2.imread("image//en_QR_Image.png",0)
 secret_coeffs = pywt.dwt2(secret_img,'haar')
